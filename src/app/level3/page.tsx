@@ -21,7 +21,7 @@ export default function LevelPage() {
         transition={{ duration: 1.5, ease: "easeInOut" }}
         className="text-6xl font-[Press Start 2P] text-pink-400"
       >
-        LEVEL 1
+        LEVEL 3
       </motion.h1>
 
       <motion.p
@@ -30,7 +30,7 @@ export default function LevelPage() {
         transition={{ duration: 2, delay: 0.5 }}
         className="mt-4 text-lg text-white"
       >
-        Know About Me
+        Character Lore
       </motion.p>
 
       <motion.button
@@ -38,7 +38,7 @@ export default function LevelPage() {
         animate={{ scale: 1 }}
         transition={{ duration: 0.8, ease: "backOut", delay: 1 }}
         className="mt-8 px-10 py-4 text-xl font-bold text-white bg-purple-700 border-4 border-pink-400 rounded-lg shadow-lg hover:scale-110 transition-transform"
-        onClick={() => router.push("/about")}
+        onClick={() => router.push("/lore")}
       >
         Start
       </motion.button>

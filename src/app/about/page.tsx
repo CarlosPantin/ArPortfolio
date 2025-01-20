@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 export default function AboutPage() {
   const router = useRouter();
@@ -9,9 +9,9 @@ export default function AboutPage() {
     <div
       className="flex flex-col items-center justify-center min-h-screen bg-purple-900 text-center"
       style={{
-        backgroundImage: 'url(/images/about-background.jpg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        backgroundImage: "url(/images/about-background.jpg)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
       <h1 className="text-6xl font-[Press Start 2P] text-white mb-8">
@@ -40,15 +40,11 @@ export default function AboutPage() {
       </div>
 
       <div className="bg-black bg-opacity-50 p-8 mt-28 max-w-lg text-white font-mono rounded-lg">
-        <p>
-          I am a third-year undergraduate student studying in some Institute of
-          Technology, somewhere. I am from the City of Joy, CityName. I
-          completed my +2 from some school.
-        </p>
+        <p>I am a passionate software developer with 1 year of experience.</p>
       </div>
 
       <button
-        onClick={() => router.push('/next-level')}
+        onClick={() => router.push("/level2")}
         className="mt-8 px-6 py-3 bg-blue-500 text-white font-bold rounded-lg hover:scale-105 transform transition-transform"
       >
         Click Me to Enter Next Level

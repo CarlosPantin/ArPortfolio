@@ -1,10 +1,13 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function CharacterLorePage() {
   const [activeLore, setActiveLore] =
     useState<keyof typeof lores>("Educational");
   const [fadeClass, setFadeClass] = useState("opacity-100");
+
+  const router = useRouter(); 
 
   const lores = {
     Educational: [
@@ -65,6 +68,10 @@ export default function CharacterLorePage() {
     }, 300);
   };
 
+  const handleGoToLevel4 = () => {
+    router.push("/level4");  
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-green-900 to-teal-700 text-white text-center">
       <h1 className="text-6xl font-[Press Start 2P] mb-8">Character Lore</h1>
@@ -121,6 +128,15 @@ export default function CharacterLorePage() {
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="mt-8">
+        <button
+          onClick={handleGoToLevel4}
+          className="px-6 py-3 text-xl font-bold text-white bg-gradient-to-r from-teal-500 to-green-500 border-2 border-teal-700 rounded-lg shadow-lg hover:scale-110 transform transition-transform"
+        >
+          Go to Level 4
+        </button>
       </div>
     </div>
   );

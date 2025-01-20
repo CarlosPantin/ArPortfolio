@@ -18,6 +18,17 @@
       opacity: 0.8;
     }
   }
+
+  .spin-left {
+    transform: rotate(-90deg);
+  }
+  .spin-right {
+    transform: rotate(90deg);
+  }
+  .transition-transform {
+    transition: transform 0.5s ease;
+  }
+  
   
   .animate-flame {
     animation: flame 0.5s infinite;

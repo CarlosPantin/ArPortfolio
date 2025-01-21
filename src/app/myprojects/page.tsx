@@ -1,124 +1,142 @@
 "use client";
 
-import React, { useState, useRef } from "react";
-import HTMLFlipBook from "react-pageflip"; 
+import { useState } from "react";
+import ReactCardFlip from "react-card-flip";
+import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
-// Project data
 const projects = [
-  { title: "Project 1", description: "This is Project 1." },
-  { title: "Project 2", description: "This is Project 2." },
-  { title: "Project 3", description: "This is Project 3." },
-  { title: "Project 4", description: "This is Project 4." },
+  {
+    id: 1,
+    name: "ToDo App",
+    description:
+      "Simple ToDo app. The user can add, delete, edit and mark as done tasks of their choice!",
+    frontImage: "/images/card1.png",
+    backImage: "/images/card-back1.png",
+    stacks: "React, CSS, HTML",
+    github: "https://github.com/CarlosPantin/todoproject",
+    liveSite: "https://todoproject-coral.vercel.app/",
+  },
+  {
+    id: 2,
+    name: "Weather App",
+    description:
+      "It happens to me that when I want to check the weather on my phone, the apps take a bit to load and have ads, so I decided to make my own!",
+    frontImage: "/images/card4.png",
+    backImage: "/images/card-back2.png",
+    stacks: "React, Node.js, CSS",
+    github: "https://github.com/CarlosPantin/my-weather-app",
+    liveSite: "https://weatherapp-self-two.vercel.app/",
+  },
+  {
+    id: 3,
+    name: "TicTacToe",
+    description:
+      "My girlfriend suggested that I make a TicTacToe game that we can use together, so I made one! It's a simple local TicTacToe game.",
+    frontImage: "/images/card3.png",
+    backImage: "/images/card-back3.png",
+    stacks: "React, CSS",
+    github: "https://github.com/CarlosPantin/tic-tac-toe",
+    liveSite: "https://tic-tac-toe-cp.vercel.app/",
+  },
+  {
+    id: 4,
+    name: "Spotify Info",
+    description:
+      "I created an app in which the user can see their top artists, top songs and some data of their profile info all year long using spotify API. Unfortunately, only registered users can test the app.",
+    frontImage: "/images/card1.png",
+    backImage: "/images/card-back1.png",
+    stacks: "React, Node.js, CSS",
+    github: "https://github.com/CarlosPantin/spotify-app",
+    liveSite: "https://www.youtube.com/watch?v=xsWV8AcXar8",
+  },
 ];
 
-interface FlipEvent {
-  data: number; 
-}
+export default function RPGFlippableCards() {
+  const [flippedCards, setFlippedCards] = useState<number[]>([]);
 
-export default function ProjectsBook() {
-  const [currentPage, setCurrentPage] = useState(0);
-  
-  const bookRef = useRef<HTMLFlipBook>(null);
-
-  const handleFlip = (e: FlipEvent) => {
-    setCurrentPage(e.data); 
-  };
-
-  const goToNextPage = () => {
-    if (bookRef.current) {
-      const pageFlip = bookRef.current.pageFlip(); 
-      pageFlip.flipNext(); 
-    }
-  };
-
-  const goToPreviousPage = () => {
-    if (bookRef.current) {
-      const pageFlip = bookRef.current.pageFlip();
-      pageFlip.flipPrev(); 
+  const handleFlip = (id: number) => {
+    if (flippedCards.includes(id)) {
+      setFlippedCards(flippedCards.filter((cardId) => cardId !== id));
+    } else {
+      setFlippedCards([...flippedCards, id]);
     }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 p-4">
-      <div className="relative w-full max-w-4xl">
-        <HTMLFlipBook
-          ref={bookRef}
-          width={window.innerWidth < 768 ? 300 : 600}  
-          height={window.innerWidth < 768 ? 400 : 800} 
-          className="shadow-2xl rounded-xl"
-          showCover={true}
-          flippingTime={1000}
-          onFlip={handleFlip}
-          startPage={0}
-          size="fixed"
-          minWidth={300}
-          minHeight={400}
-          maxWidth={1200}
-          maxHeight={1600}
-          drawShadow={true}
-          usePortrait={true}
-          startZIndex={0}
-          autoSize={true}
-          maxShadowOpacity={0.5}
-          mobileScrollSupport={true}
-          swipeDistance={30}
-          clickEventForward={true}
-          useMouseEvents={false} 
-          style={{}}
-          showPageCorners={true}
-          disableFlipByClick={false}
-        >
-          {/* Front Cover */}
-          <div className="flex bg-[url('/images/bookcover.jpg')] bg-cover bg-no-repeat items-center justify-center h-full rounded-xl">
-            <h1 className="text-white text-4xl font-bold tracking-wide opacity-90">
-              Welcome to My Projects
-            </h1>
-          </div>
+    <div className="flex flex-col items-center min-h-screen bg-gradient-to-b from-gray-800 to-black">
+      <h1 className="text-4xl font-semibold text-white my-8">
+        Character's Starting Inventory
+      </h1>
 
-          {/* Pages */}
-          {projects.map((project, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-center justify-center bg-[url('/images/paper.jpg')] bg-cover bg-no-repeat p-10 rounded-xl shadow-xl"
-            >
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                {project.title}
-              </h2>
-              <p className="text-lg text-gray-600">{project.description}</p>
-            </div>
-          ))}
-
-          {/* Last Page */}
-          <div
-            className="flex items-center justify-center bg-[url('/images/bookcover.jpg')] bg-cover bg-no-repeat h-full rounded-xl"
-            style={{
-              display: currentPage === projects.length + 1 ? "flex" : "none", // Only show on last page
-            }}
+      <div className="flex flex-wrap justify-center items-center gap-8">
+        {projects.map((project) => (
+          <ReactCardFlip
+            key={project.id}
+            isFlipped={flippedCards.includes(project.id)}
+            flipDirection="horizontal"
           >
-            <h1 className="text-white text-4xl font-bold tracking-wide opacity-90">
-              The End
-            </h1>
-          </div>
-        </HTMLFlipBook>
-      </div>
+            {/* Front Side */}
+            <div
+              onClick={() => handleFlip(project.id)}
+              className="w-64 h-96 rounded-xl shadow-lg cursor-pointer hover:scale-105 transition-transform relative overflow-hidden"
+              style={{
+                backgroundImage: `url('${project.frontImage}')`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            >
+              <div className="absolute inset-0 flex flex-col justify-center items-center text-white text-center p-2">
+                <h2 className="text-xs font-semibold leading-tight">
+                  {project.name}
+                </h2>
+              </div>
+            </div>
 
-      <div className="flex space-x-4 mt-8">
-        <button
-          onClick={goToPreviousPage}
-          className="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition-colors duration-300"
-        >
-          Previous Page
-        </button>
-        <button
-          onClick={goToNextPage}
-          className="px-6 py-2 bg-teal-600 text-white font-semibold rounded-lg shadow-lg hover:bg-teal-700 transition-colors duration-300"
-        >
-          Next Page
-        </button>
-      </div>
+            {/* Back Side */}
+            <div
+              onClick={() => handleFlip(project.id)}
+              className="w-64 h-96 rounded-xl shadow-lg cursor-pointer hover:scale-105 transition-transform relative overflow-hidden bg-gray-900 text-white p-4"
+              style={{
+                backgroundImage: project.backImage
+                  ? `url('${project.backImage}')`
+                  : undefined,
+                backgroundSize: project.backImage ? "cover" : undefined,
+                backgroundPosition: project.backImage ? "center" : undefined,
+              }}
+            >
+              <h2 className="absolute inset-0 flex flex-col justify-center items-center text-white text-center p-2 mt-20 text-2xl">
+                {project.name}
+              </h2>
 
-      <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2 text-white font-semibold text-xl">
-        <p>Current Page: {currentPage}</p>
+              <p className="absolute top-4 left-10 right-10 text-sm text-center p-2">
+                {project.description}
+              </p>
+
+              <p className="absolute bottom-9 left-0 right-0 text-xl text-center p-2">
+                {project.stacks}
+              </p>
+
+              <div className="absolute bottom-16 left-0 right-0 flex justify-around space-x-4 p-2">
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white py-2 px-4 rounded-full text-sm flex items-center justify-center space-x-2 transition-all duration-200"
+                >
+                  <FaGithub className="h-5 w-5 translate-x-3.5 -translate-y-4" />
+                </a>
+                <a
+                  href={project.liveSite}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white py-2 px-4 rounded-full text-sm flex items-center justify-center space-x-2 transition-all duration-200"
+                >
+                  <FaExternalLinkAlt className="h-5 w-5 -translate-x-2.5 -translate-y-4" />
+                </a>
+              </div>
+            </div>
+          </ReactCardFlip>
+        ))}
       </div>
     </div>
   );

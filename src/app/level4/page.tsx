@@ -30,7 +30,7 @@ export default function LevelPage() {
         transition={{ duration: 2, delay: 0.5 }}
         className="mt-4 text-lg text-white"
       >
-        My Projects
+        Character's Starting Inventory
       </motion.p>
 
       <motion.button

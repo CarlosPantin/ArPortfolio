@@ -1,20 +1,17 @@
 import React from 'react';
+import { Press_Start_2P } from 'next/font/google';
 import './globals.css';
 
-export default function Layout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+const pressStart2P = Press_Start_2P({
+  subsets: ['latin'],
+  weight: '400',  
+});
+
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
-        />
-      </head>
-      <body className="font-[Press Start 2P]">
+      <head />
+      <body className={pressStart2P.className}>
         {children}
       </body>
     </html>

@@ -7,7 +7,7 @@ export default function CharacterLorePage() {
     useState<keyof typeof lores>("Educational");
   const [fadeClass, setFadeClass] = useState("opacity-100");
 
-  const router = useRouter(); 
+  const router = useRouter();
 
   const lores = {
     Educational: [
@@ -69,19 +69,21 @@ export default function CharacterLorePage() {
   };
 
   const handleGoToLevel4 = () => {
-    router.push("/level4");  
+    router.push("/level4");
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-green-900 to-teal-700 text-white text-center">
-      <h1 className="text-6xl font-[Press Start 2P] mb-8">Character Lore</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-green-900 to-teal-700 text-white text-center px-4">
+      <h1 className="text-4xl sm:text-6xl font-[Press Start 2P] mb-8">
+        Character Lore
+      </h1>
 
-      <div className="flex space-x-4 mb-10">
+      <div className="flex flex-wrap gap-4 justify-center mb-10">
         {Object.keys(lores).map((loreType) => (
           <button
             key={loreType}
             onClick={() => handleTabChange(loreType as keyof typeof lores)}
-            className={`px-6 py-2 rounded-lg font-bold ${
+            className={`px-6 py-2 rounded-lg font-bold text-sm sm:text-lg ${
               activeLore === loreType
                 ? "bg-teal-500 text-white"
                 : "bg-gray-500 text-gray-200 hover:bg-gray-600"
@@ -93,14 +95,14 @@ export default function CharacterLorePage() {
       </div>
 
       <div
-        className={`relative w-3/4 md:w-1/2 transition-opacity duration-300 ${fadeClass}`}
+        className={`relative w-full sm:w-3/4 md:w-1/2 transition-opacity duration-300 ${fadeClass}`}
       >
         <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-white/50"></div>
 
         {lores[activeLore].map((item, index) => (
           <div
             key={index}
-            className={`relative mb-12 flex items-center ${
+            className={`relative mb-12 flex flex-col sm:flex-row items-center ${
               index % 2 === 0 ? "justify-start" : "justify-end"
             }`}
           >
@@ -109,7 +111,7 @@ export default function CharacterLorePage() {
             </div>
 
             <div
-              className={`bg-white text-black p-6 rounded-lg shadow-lg max-w-sm ${
+              className={`bg-white text-black p-6 rounded-lg shadow-lg max-w-full sm:max-w-sm ${
                 index % 2 === 0 ? "ml-10" : "mr-10"
               } hover:scale-105 transform transition-transform`}
             >
@@ -133,7 +135,7 @@ export default function CharacterLorePage() {
       <div className="mt-8">
         <button
           onClick={handleGoToLevel4}
-          className="px-6 py-3 text-xl font-bold text-white bg-gradient-to-r from-teal-500 to-green-500 border-2 border-teal-700 rounded-lg shadow-lg hover:scale-110 transform transition-transform"
+          className="px-6 py-3 text-lg sm:text-xl font-bold text-white bg-gradient-to-r from-teal-500 to-green-500 border-2 border-teal-700 rounded-lg shadow-lg hover:scale-110 transform transition-transform"
         >
           Go to Level 4
         </button>

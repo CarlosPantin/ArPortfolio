@@ -13,22 +13,23 @@ export default function SkillsPage() {
         backgroundPosition: "center",
       }}
     >
-      <h1 className="text-6xl font-[Press Start 2P] text-white mb-12">
+      <h1 className="text-4xl sm:text-6xl font-[Press Start 2P] text-white mb-12">
         Character Skills
       </h1>
 
-      <div className="flex flex-wrap gap-8 justify-center max-w-5xl">
+      <div className="flex flex-wrap gap-6 sm:gap-8 justify-center max-w-5xl mx-auto">
         {skills.map((skill, index) => (
           <div
             key={index}
-            className="flex flex-col items-center w-72 bg-indigo-800 text-white rounded-lg shadow-lg p-6 hover:scale-105 transform transition-transform"
+            className="flex flex-col items-center w-72 sm:w-80 bg-indigo-800 text-white rounded-lg shadow-lg p-6 hover:scale-105 transform transition-transform"
           >
-            <div className="text-5xl mb-4">{skill.icon}</div>
-            <h2 className="text-2xl font-bold mb-2">{skill.name}</h2>
-            <p className="text-sm">{skill.description}</p>
+            <div className="text-4xl sm:text-5xl mb-4">{skill.icon}</div>
+            <h2 className="text-xl sm:text-2xl font-bold mb-2">{skill.name}</h2>
+            <p className="text-sm sm:text-base">{skill.description}</p>
           </div>
         ))}
       </div>
+
       <button
         onClick={() => router.push("/level3")}
         className="mt-8 px-6 py-3 bg-blue-500 text-white font-bold rounded-lg hover:scale-105 transform transition-transform"

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
@@ -19,7 +19,7 @@ export default function LevelPage() {
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.5, ease: "easeInOut" }}
-        className="text-6xl font-[Press Start 2P] text-pink-400"
+        className="text-4xl sm:text-6xl font-[Press Start 2P] text-pink-400"
       >
         LEVEL 2
       </motion.h1>
@@ -28,7 +28,7 @@ export default function LevelPage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 2, delay: 0.5 }}
-        className="mt-4 text-lg text-white"
+        className="mt-4 text-lg sm:text-xl text-white"
       >
         Character Skills
       </motion.p>
@@ -37,7 +37,7 @@ export default function LevelPage() {
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ duration: 0.8, ease: "backOut", delay: 1 }}
-        className="mt-8 px-10 py-4 text-xl font-bold text-white bg-purple-700 border-4 border-pink-400 rounded-lg shadow-lg hover:scale-110 transition-transform"
+        className="mt-8 px-8 sm:px-10 py-4 text-lg sm:text-xl font-bold text-white bg-purple-700 border-4 border-pink-400 rounded-lg shadow-lg hover:scale-110 transition-transform"
         onClick={() => router.push("/skills")}
       >
         Start

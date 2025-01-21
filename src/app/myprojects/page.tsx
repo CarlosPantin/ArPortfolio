@@ -23,7 +23,7 @@ const projects = [
       "It happens to me that when I want to check the weather on my phone, the apps take a bit to load and have ads, so I decided to make my own!",
     frontImage: "/images/card4.png",
     backImage: "/images/card-back2.png",
-    stacks: "React, Node.js, CSS",
+    stacks: "React, Node, CSS",
     github: "https://github.com/CarlosPantin/my-weather-app",
     liveSite: "https://weatherapp-self-two.vercel.app/",
   },
@@ -42,10 +42,10 @@ const projects = [
     id: 4,
     name: "Spotify Info",
     description:
-      "I created an app in which the user can see their top artists, top songs and some data of their profile info all year long using spotify API. Unfortunately, only registered users can test the app.",
+      "I created an app in which the user can see their top artists, top songs and some data of their profile info all year long using spotify API.",
     frontImage: "/images/card1.png",
     backImage: "/images/card-back1.png",
-    stacks: "React, Node.js, CSS",
+    stacks: "React, Node, CSS",
     github: "https://github.com/CarlosPantin/spotify-app",
     liveSite: "https://www.youtube.com/watch?v=xsWV8AcXar8",
   },
@@ -64,8 +64,8 @@ export default function RPGFlippableCards() {
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-gradient-to-b from-gray-800 to-black">
-      <h1 className="text-4xl font-semibold text-white my-8">
-        Character's Starting Inventory
+      <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-white my-8 text-center">
+        Character&apos;s Starting Inventory
       </h1>
 
       <div className="flex flex-wrap justify-center items-center gap-8">
@@ -104,15 +104,15 @@ export default function RPGFlippableCards() {
                 backgroundPosition: project.backImage ? "center" : undefined,
               }}
             >
-              <h2 className="absolute inset-0 flex flex-col justify-center items-center text-white text-center p-2 mt-20 text-2xl">
+              <h2 className="absolute inset-0 flex flex-col justify-center items-center text-white text-center p-2 mt-20 text-s">
                 {project.name}
               </h2>
 
-              <p className="absolute top-4 left-10 right-10 text-sm text-center p-2">
+              <p className="absolute top-4 left-10 right-10 text-xs text-center p-2">
                 {project.description}
               </p>
 
-              <p className="absolute bottom-9 left-0 right-0 text-xl text-center p-2">
+              <p className="absolute bottom-9 left-0 right-0 text-s text-center p-2">
                 {project.stacks}
               </p>
 

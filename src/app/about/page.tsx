@@ -41,12 +41,12 @@ export default function AboutPage() {
 
       <div className="bg-black bg-opacity-50 p-6 sm:p-8 mt-10 sm:mt-28 max-w-lg text-white rounded-lg">
         <p className="text-sm sm:text-base">
-          Hello, I&apos;m Carlos Pantin. I&apos;m a passionate developer with a love for
-          creating interactive and user-friendly web applications. I enjoy
-          working with technologies like React, HTML, CSS, Javascript among
-          others to build beautiful and responsive websites. When I&apos;m not
-          coding, I love to learn more about new coding practices and I love to
-          keep a healthy body with working out. Feel free to explore my
+          Hello, I&apos;m Carlos Pantin. I&apos;m a passionate developer with a
+          love for creating interactive and user-friendly web applications. I
+          enjoy working with technologies like React, HTML, CSS, Javascript
+          among others to build beautiful and responsive websites. When I&apos;m
+          not coding, I love to learn more about new coding practices and I love
+          to keep a healthy body with working out. Feel free to explore my
           portfolio to see some of my recent projects.
         </p>
       </div>

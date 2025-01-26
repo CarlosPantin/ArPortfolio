@@ -49,6 +49,17 @@ const projects = [
     github: "https://github.com/CarlosPantin/spotify-app",
     liveSite: "https://www.youtube.com/watch?v=xsWV8AcXar8",
   },
+  {
+    id: 5,
+    name: "CatCare",
+    description:
+      "A platform in which the user can manage all the needs of their cats.",
+    frontImage: "/images/card4.png",
+    backImage: "/images/card-back2.png",
+    stacks: "In development",
+    github: "",
+    liveSite: "",
+  },
 ];
 
 export default function RPGFlippableCards() {

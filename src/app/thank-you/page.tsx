@@ -25,14 +25,14 @@ export default function ThankYouPage() {
         <div className="flex flex-col gap-4">
           <Link
             href="/"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300"
+            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 max-w-xs mx-auto rounded-lg transition-all duration-300"
           >
             Main Menu
           </Link>
 
           <Link
             href="/contact"
-            className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300"
+            className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 max-w-xs mx-auto rounded-lg transition-all duration-300"
           >
             Contact Me
           </Link>

@@ -21,12 +21,22 @@ export default function ThankYouPage() {
         <p className="text-lg sm:text-xl md:text-2xl mb-12">
           You have completed all the levels. Hope you enjoyed my game!!!!!
         </p>
-        <Link
-          href="/"
-          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300"
-        >
-          Main Menu
-        </Link>
+
+        <div className="flex flex-col gap-4">
+          <Link
+            href="/"
+            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300"
+          >
+            Main Menu
+          </Link>
+
+          <Link
+            href="/contact"
+            className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300"
+          >
+            Contact Me
+          </Link>
+        </div>
       </motion.div>
     </div>
   );

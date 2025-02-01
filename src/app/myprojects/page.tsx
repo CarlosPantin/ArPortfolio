@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from "react";
 import ReactCardFlip from "react-card-flip";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation"; 
+import { useRouter } from "next/navigation";
 
 const initialProjects = [
   {
@@ -85,7 +85,7 @@ const initialProjects = [
 ];
 
 export default function RPGFlippableCards() {
-  const router = useRouter(); 
+  const router = useRouter();
   const [flippedCards, setFlippedCards] = useState<number[]>([]);
   const [isShuffling, setIsShuffling] = useState(true);
 
@@ -209,9 +209,11 @@ export default function RPGFlippableCards() {
 
       <button
         onClick={handleFinishGame}
-        className="mt-12 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300"
+        className="relative overflow-hidden mt-16 bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-semibold py-4 px-10 rounded-full shadow-lg transform transition-all duration-300 ease-in-out hover:scale-110 hover:shadow-2xl group"
       >
         Finish Game
+        <span className="absolute bottom-0 left-0 w-full h-1 bg-yellow-400 scale-x-0 group-hover:scale-x-100 transition-all duration-500 ease-in-out origin-left"></span>
+        <span className="absolute inset-0 border-2 border-transparent rounded-full group-hover:border-yellow-400 transition-all duration-500 ease-in-out"></span>
       </button>
     </div>
   );

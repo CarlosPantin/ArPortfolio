@@ -60,8 +60,8 @@ const initialProjects = [
     frontImage: "/images/card4.png",
     backImage: "/images/card-back2.png",
     stacks: "In development",
-    github: "",
-    liveSite: "",
+    github: "https://github.com/CarlosPantin/CatCare",
+    liveSite: "https://catcare-vert.vercel.app/",
   },
   {
     id: 6,

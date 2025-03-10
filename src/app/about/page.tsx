@@ -55,7 +55,7 @@ export default function AboutPage() {
         onClick={() => router.push("/level2")}
         className="mt-8 px-6 py-3 sm:px-8 sm:py-4 bg-blue-500 text-white font-bold rounded-lg hover:scale-105 transform transition-transform"
       >
-        Click Me to Enter Next Level
+        Next Level
       </button>
     </div>
   );

@@ -137,7 +137,7 @@ export default function CharacterLorePage() {
           onClick={handleGoToLevel4}
           className="px-6 py-3 text-lg sm:text-xl font-bold text-white bg-gradient-to-r from-teal-500 to-green-500 border-2 border-teal-700 rounded-lg shadow-lg hover:scale-110 transform transition-transform"
         >
-          Go to Level 4
+          Next Level
         </button>
       </div>
     </div>

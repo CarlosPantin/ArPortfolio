@@ -28,7 +28,7 @@ export default function CharacterLorePage() {
         year: "2025 - Present",
         title: "Masters Degree - Oulu University",
         description:
-          "Pursuing advanced studies in software engineering and web development.",
+          "Pursuing a master's degree in Software Engineering and Information Systems.",
         icon: "📚",
       },
     ],

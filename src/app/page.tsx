@@ -26,7 +26,7 @@ export default function MainPage() {
 
       <div className="relative z-10">
         <h1 className="text-4xl sm:text-6xl font-[Press Start 2P] text-white">
-          WELCOME
+          WELCOME TO MY PORTFOLIO
         </h1>
 
         <p className="mt-4 text-lg sm:text-xl text-white">

@@ -34,12 +34,12 @@ const initialProjects = [
     id: 3,
     name: "TicTacToe",
     description:
-      "My girlfriend suggested that I make a TicTacToe game that we can use together, so I made one! It's a simple local TicTacToe game.",
+      "A dynamic CV creator that allows the user to create, edit, and download a CV with a specific template.",
     frontImage: "/images/card3.png",
     backImage: "/images/card-back3.png",
-    stacks: "React, CSS",
-    github: "https://github.com/CarlosPantin/tic-tac-toe",
-    liveSite: "https://tic-tac-toe-cp.vercel.app/",
+    stacks: "React, Tailwind, Python, TypeScript",
+    github: "",
+    liveSite: "",
   },
   {
     id: 4,

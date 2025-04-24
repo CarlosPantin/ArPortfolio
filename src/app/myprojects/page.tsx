@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { JSX, useState } from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
@@ -14,7 +14,22 @@ import {
 } from "react-icons/di";
 import { SiTailwindcss, SiTypescript } from "react-icons/si";
 
-const projects = [
+interface Project {
+  id: number;
+  name: string;
+  description: string;
+  stacks: string[];
+  github: string;
+  liveSite: string;
+  color: string;
+}
+
+interface RetroArcadeCardProps {
+  project: Project;
+  onClick: () => void;
+}
+
+const projects: Project[] = [
   {
     id: 1,
     name: "ToDo App",
@@ -85,7 +100,7 @@ const projects = [
   },
 ];
 
-const stackIcons = {
+const stackIcons: { [key: string]: JSX.Element } = {
   React: <DiReact className="text-blue-400" />,
   CSS: <DiCss3 className="text-blue-500" />,
   HTML: <DiHtml5 className="text-orange-500" />,
@@ -96,21 +111,22 @@ const stackIcons = {
   TypeScript: <SiTypescript className="text-blue-600" />,
 };
 
-const RetroArcadeCard = ({ project, isExpanded, onClick }) => {
-  const generatePixelBorder = (color) => {
-    return {
-      boxShadow: `
-        0 0 0 2px ${color},
-        0 0 0 4px #000,
-        0 0 0 6px ${color},
-        0 0 20px rgba(255, 255, 255, 0.3)
-      `,
-    };
-  };
+const RetroArcadeCard: React.FC<RetroArcadeCardProps> = ({
+  project,
+  onClick,
+}) => {
+  const generatePixelBorder = (color: string): React.CSSProperties => ({
+    boxShadow: `
+      0 0 0 2px ${color},
+      0 0 0 4px #000,
+      0 0 0 6px ${color},
+      0 0 20px rgba(255, 255, 255, 0.3)
+    `,
+  });
 
   return (
     <motion.div
-      className={`relative w-full overflow-hidden transition-all duration-300`}
+      className="relative w-full overflow-hidden transition-all duration-300"
       whileHover={{ scale: 1.02 }}
       layoutId={`project-${project.id}`}
       onClick={onClick}
@@ -129,7 +145,6 @@ const RetroArcadeCard = ({ project, isExpanded, onClick }) => {
             }}
           />
         </div>
-
         <div className="absolute inset-0 overflow-hidden">
           <div
             className="absolute h-1 bg-gradient-to-r from-transparent via-white to-transparent top-6 -left-40 w-40 opacity-50"
@@ -141,34 +156,21 @@ const RetroArcadeCard = ({ project, isExpanded, onClick }) => {
           />
         </div>
 
-        <div
-          className="absolute top-2 left-2 w-2 h-2 rounded-full"
-          style={{
-            backgroundColor: project.color,
-            boxShadow: `0 0 10px ${project.color}`,
-          }}
-        />
-        <div
-          className="absolute top-2 right-2 w-2 h-2 rounded-full"
-          style={{
-            backgroundColor: project.color,
-            boxShadow: `0 0 10px ${project.color}`,
-          }}
-        />
-        <div
-          className="absolute bottom-2 left-2 w-2 h-2 rounded-full"
-          style={{
-            backgroundColor: project.color,
-            boxShadow: `0 0 10px ${project.color}`,
-          }}
-        />
-        <div
-          className="absolute bottom-2 right-2 w-2 h-2 rounded-full"
-          style={{
-            backgroundColor: project.color,
-            boxShadow: `0 0 10px ${project.color}`,
-          }}
-        />
+        {[
+          "top-2 left-2",
+          "top-2 right-2",
+          "bottom-2 left-2",
+          "bottom-2 right-2",
+        ].map((pos, i) => (
+          <div
+            key={i}
+            className={`absolute ${pos} w-2 h-2 rounded-full`}
+            style={{
+              backgroundColor: project.color,
+              boxShadow: `0 0 10px ${project.color}`,
+            }}
+          />
+        ))}
 
         <div className="relative z-10 p-5">
           <div className="flex items-start justify-between">
@@ -181,7 +183,6 @@ const RetroArcadeCard = ({ project, isExpanded, onClick }) => {
             >
               {project.name}
             </h3>
-
             <div
               className="w-3 h-3 rounded-full animate-pulse"
               style={{
@@ -244,9 +245,7 @@ const RetroArcadeCard = ({ project, isExpanded, onClick }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-4 py-2 rounded flex items-center space-x-2 text-sm"
-                  style={{
-                    backgroundColor: project.color,
-                  }}
+                  style={{ backgroundColor: project.color }}
                   whileHover={{
                     scale: 1.05,
                     boxShadow: `0 0 15px ${project.color}`,
@@ -267,9 +266,9 @@ const RetroArcadeCard = ({ project, isExpanded, onClick }) => {
 
 export default function ArcadeProjects() {
   const router = useRouter();
-  const [expandedProject, setExpandedProject] = useState(null);
+  const [expandedProject, setExpandedProject] = useState<number | null>(null);
 
-  const handleProjectClick = (id) => {
+  const handleProjectClick = (id: number) => {
     setExpandedProject(id === expandedProject ? null : id);
   };
 
@@ -287,7 +286,7 @@ export default function ArcadeProjects() {
         <div
           className="absolute inset-0"
           style={{ animation: "gridMove 20s infinite linear" }}
-        ></div>
+        />
       </div>
 
       <div className="relative z-10 min-h-screen container mx-auto px-4">
@@ -299,9 +298,7 @@ export default function ArcadeProjects() {
           >
             <h1
               className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 mb-4 font-arcade"
-              style={{
-                textShadow: "0 0 10px rgba(255,0,255,0.7)",
-              }}
+              style={{ textShadow: "0 0 10px rgba(255,0,255,0.7)" }}
             >
               [PROJECT ARCADE]
             </h1>
@@ -315,7 +312,7 @@ export default function ArcadeProjects() {
               <p className="text-cyan-400 text-base md:text-lg font-arcade py-2 px-4 border-2 border-cyan-500 rounded">
                 Take a look at my projects
               </p>
-              <div className="absolute -inset-px border-2 border-cyan-400 rounded opacity-50 animate-pulse"></div>
+              <div className="absolute -inset-px border-2 border-cyan-400 rounded opacity-50 animate-pulse" />
             </div>
           </motion.div>
         </header>
@@ -335,7 +332,6 @@ export default function ArcadeProjects() {
             >
               <RetroArcadeCard
                 project={project}
-                isExpanded={expandedProject === project.id}
                 onClick={() => handleProjectClick(project.id)}
               />
             </motion.div>

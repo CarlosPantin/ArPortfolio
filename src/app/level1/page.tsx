@@ -8,7 +8,7 @@ export default function LevelPage() {
   const router = useRouter();
   const [countdown, setCountdown] = useState<number | null>(null);
   const [isPlayerReady, setIsPlayerReady] = useState(false);
-  const [gameHints] = useState([
+  const [gameHints] = useState<string[]>([
     "Use arrow keys to navigate",
     "Press space to interact",
     "Collect all achievements",
@@ -17,12 +17,13 @@ export default function LevelPage() {
   const [currentHint, setCurrentHint] = useState(0);
 
   useEffect(() => {
-    if (!isPlayerReady) return;
-    const hintInterval = setInterval(() => {
-      setCurrentHint((prev) => (prev + 1) % gameHints.length);
-    }, 3000);
-    return () => clearInterval(hintInterval);
-  }, [isPlayerReady, gameHints.length]);
+    if (isPlayerReady) {
+      const hintInterval = setInterval(() => {
+        setCurrentHint((prev) => (prev + 1) % gameHints.length);
+      }, 3000);
+      return () => clearInterval(hintInterval);
+    }
+  }, [isPlayerReady, gameHints]);
 
   useEffect(() => {
     if (isPlayerReady && countdown === null) {
@@ -31,12 +32,12 @@ export default function LevelPage() {
 
     if (countdown !== null && countdown > 0) {
       const timer = setTimeout(() => {
-        setCountdown((prev) => (prev ?? 1) - 1);
+        setCountdown(countdown - 1);
       }, 1000);
       return () => clearTimeout(timer);
     } else if (countdown === 0) {
       const timer = setTimeout(() => {
-        router.push("/lore");
+        router.push("/about");
       }, 500);
       return () => clearTimeout(timer);
     }
@@ -67,11 +68,8 @@ export default function LevelPage() {
             animation: "grid-move 15s linear infinite",
           }}
         />
-
         <div className="absolute inset-0 opacity-10 pointer-events-none scanlines" />
-
         <div className="absolute top-10 right-10 w-32 h-32 bg-gradient-to-b from-purple-700 to-purple-900 rounded-full opacity-50 glow-effect" />
-
         <div
           className="absolute inset-0 bg-cover bg-center opacity-30"
           style={{
@@ -97,7 +95,7 @@ export default function LevelPage() {
                   "0 0 10px rgba(236, 72, 153, 0.8), 0 0 20px rgba(236, 72, 153, 0.5)",
               }}
             >
-              LEVEL 3
+              LEVEL 1
             </h1>
             <div className="absolute -top-2 -right-2 w-4 h-4 bg-pink-500 rounded-full animate-pulse" />
             <div
@@ -111,7 +109,7 @@ export default function LevelPage() {
               className="text-xl sm:text-3xl font-bold text-cyan-400"
               style={{ textShadow: "0 0 10px rgba(34, 211, 238, 0.7)" }}
             >
-              ᐅ MY LORE
+              ᐅ KNOW ABOUT ME
             </h2>
             <div className="w-3 h-6 bg-cyan-400 ml-2 animate-blink" />
           </div>
@@ -142,12 +140,12 @@ export default function LevelPage() {
 
             <div className="flex flex-col items-center">
               <span className="text-xs text-cyan-300">EXP REWARD</span>
-              <span className="text-lg font-bold text-yellow-400">+300</span>
+              <span className="text-lg font-bold text-yellow-400">+500</span>
             </div>
 
             <div className="flex flex-col items-end">
               <span className="text-xs text-cyan-300">EST. TIME</span>
-              <span className="text-lg font-bold text-white">1:30</span>
+              <span className="text-lg font-bold text-white">3:00</span>
             </div>
           </div>
         </motion.div>
@@ -160,11 +158,10 @@ export default function LevelPage() {
         >
           <div className="inline-block bg-gradient-to-r from-purple-900/70 to-indigo-900/70 py-4 px-6 rounded-lg border border-purple-700">
             <p className="text-base sm:text-lg text-cyan-50">
-              Discover my{" "}
-              <span className="text-pink-400 font-bold">
-                professional and educational
-              </span>{" "}
-              background and my future plans!
+              Discover the origins of{" "}
+              <span className="text-pink-400 font-bold">Carlos Pantin</span>,
+              their skills, experience, and what drives their passion for
+              development. Complete this level to learn more!
             </p>
           </div>
         </motion.div>
@@ -194,7 +191,7 @@ export default function LevelPage() {
             transition={{ duration: 0.3 }}
             className="text-center"
           >
-            {countdown !== null && countdown > 0 ? (
+            {typeof countdown === "number" && countdown > 0 ? (
               <div
                 className="text-8xl font-bold text-pink-500"
                 style={{
@@ -204,7 +201,7 @@ export default function LevelPage() {
               >
                 {countdown}
               </div>
-            ) : countdown === 0 ? (
+            ) : (
               <div
                 className="text-5xl font-bold text-green-500"
                 style={{
@@ -214,7 +211,7 @@ export default function LevelPage() {
               >
                 GO!
               </div>
-            ) : null}
+            )}
           </motion.div>
         )}
 
@@ -238,7 +235,6 @@ export default function LevelPage() {
           <div className="w-4 h-4 bg-pink-500 rounded-full animate-pulse" />
           <span className="text-pink-400 text-xs uppercase">LIVE</span>
         </div>
-
         <div className="fixed top-6 right-6 flex items-center space-x-2 opacity-70">
           <span className="text-cyan-400 text-xs uppercase">HP</span>
           <div className="w-20 h-2 bg-gray-800 rounded-full overflow-hidden">

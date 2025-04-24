@@ -273,7 +273,7 @@ export default function ArcadeLandingPage() {
                     <div className="mt-2 text-xs text-cyan-300">
                       {level === 1 && "INTRO"}
                       {level === 2 && "SKILLS"}
-                      {level === 3 && "PROJECTS"}
+                      {level === 3 && "BACKGROUND"}
                       {level === 4 && "PROJECTS"}
                     </div>
                   </motion.button>

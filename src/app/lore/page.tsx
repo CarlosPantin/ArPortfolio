@@ -10,8 +10,7 @@ interface BaseLoreItem {
   description: string;
   icon: string;
 }
-
-interface EducationalLoreItem extends BaseLoreItem {}
+type EducationalLoreItem = BaseLoreItem;
 
 interface ProfessionalLoreItem extends BaseLoreItem {
   company: string;

@@ -81,6 +81,14 @@ export default function CharacterLorePage() {
         icon: "🚀",
       },
       {
+        year: "2025 - Present",
+        title: "Lead Software Engineer",
+        company: "Lumiery Oy",
+        description:
+          "Lead developer for a startup. I am tasked to bring Lumiery's ideas to life using a wide range of technologies",
+        icon: "🚀",
+      },
+      {
         year: "Unlimited",
         title: "FreeLancer",
         company: "Me, Myself, and I",

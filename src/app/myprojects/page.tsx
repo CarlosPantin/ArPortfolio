@@ -12,7 +12,7 @@ import {
   DiNodejsSmall,
   DiPython,
 } from "react-icons/di";
-import { SiTailwindcss, SiTypescript } from "react-icons/si";
+import { SiJavascript, SiTailwindcss, SiTypescript } from "react-icons/si";
 
 interface Project {
   id: number;
@@ -98,6 +98,15 @@ const projects: Project[] = [
     liveSite: "https://jessika-tyni-portfolio.vercel.app/",
     color: "#E91E63",
   },
+  {
+    id: 8,
+    name: "Landing Page: Lumiery Oy",
+    description: "Developed and created a full landing page for Lumiery Oy.",
+    stacks: ["JavaScript", "TailwindCSS", "React"],
+    github: "",
+    liveSite: "",
+    color: "#f7f5f6",
+  },
 ];
 
 const stackIcons: { [key: string]: JSX.Element } = {
@@ -109,6 +118,7 @@ const stackIcons: { [key: string]: JSX.Element } = {
   Tailwind: <SiTailwindcss className="text-cyan-400" />,
   TailwindCSS: <SiTailwindcss className="text-cyan-400" />,
   TypeScript: <SiTypescript className="text-blue-600" />,
+  JavaScript: <SiJavascript className="text-blue-600" />,
 };
 
 const RetroArcadeCard: React.FC<RetroArcadeCardProps> = ({

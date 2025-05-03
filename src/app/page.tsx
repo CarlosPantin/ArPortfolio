@@ -4,343 +4,324 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function ArcadeLandingPage() {
+export default function RetroGamingPortfolio() {
   const router = useRouter();
-  const [showLevelSelect, setShowLevelSelect] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [insertCoin, setInsertCoin] = useState(false);
-  const [glitchEffect, setGlitchEffect] = useState(false);
+  const [currentState, setCurrentState] = useState("intro");
+  const [selectedOption, setSelectedOption] = useState(0);
+  const [showCursor, setShowCursor] = useState(true);
+
+  const menuOptions = [
+    { label: "PROJECTS", path: "/myprojects" },
+    { label: "SKILLS", path: "/skills" },
+    { label: "ABOUT ME", path: "/about" },
+    { label: "BACKGROUND & EXPERIENCE", path: "/lore" },
+    { label: "CONTACT ME", path: "/contact" },
+  ];
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-      setInsertCoin(true);
-    }, 2500);
+    const cursorInterval = setInterval(() => {
+      setShowCursor((prev) => !prev);
+    }, 500);
+
+    return () => clearInterval(cursorInterval);
   }, []);
 
-  const handleInsertCoin = () => {
-    setGlitchEffect(false);
-    setTimeout(() => {
-      setGlitchEffect(false);
-      setInsertCoin(false);
-    }, 500);
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (currentState !== "main") return;
+
+      switch (e.key) {
+        case "ArrowUp":
+          setSelectedOption((prev) =>
+            prev > 0 ? prev - 1 : menuOptions.length - 1
+          );
+          break;
+        case "ArrowDown":
+          setSelectedOption((prev) =>
+            prev < menuOptions.length - 1 ? prev + 1 : 0
+          );
+          break;
+        case "Enter":
+          router.push(menuOptions[selectedOption].path);
+          break;
+        default:
+          break;
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [currentState, selectedOption, menuOptions, router]);
+
+  const handleStart = () => {
+    setCurrentState("main");
   };
 
-  const handleSelectLevel = (level: number) => {
-    router.push(`/level${level}`);
+  const handleOptionClick = (index: number) => {
+    router.push(menuOptions[index].path);
   };
 
   return (
-    <div
-      className={`min-h-screen relative overflow-hidden ${
-        glitchEffect ? "animate-glitch" : ""
-      }`}
-      style={{
-        background:
-          "radial-gradient(circle at center, #2b1055 0%, #0f0930 100%)",
-      }}
-    >
-      <div className="absolute inset-0 z-0">
-        <div className="stars-container absolute inset-0" />
-        <div
-          className="grid-overlay absolute inset-0 opacity-30"
-          style={{
-            backgroundImage:
-              "linear-gradient(to bottom, rgba(10,10,40,0.5) 1px, transparent 1px), linear-gradient(to right, rgba(10,10,40,0.5) 1px, transparent 1px)",
-            backgroundSize: "50px 50px",
-            transform: "perspective(500px) rotateX(60deg)",
-          }}
-        />
-      </div>
-
-      <div className="absolute inset-0 z-0 opacity-40">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="/videos/bgvideo.mp4" type="video/mp4" />
-        </video>
-        <div
-          className="absolute inset-0 pointer-events-none opacity-20"
-          style={{
-            backgroundImage:
-              "repeating-linear-gradient(0deg, rgba(0,0,0,0.15), rgba(0,0,0,0.15) 1px, transparent 1px, transparent 2px)",
-          }}
-        />
-      </div>
-
-      {isLoading && (
-        <div className="absolute inset-0 z-40 flex flex-col items-center justify-center bg-black">
-          <h1
-            className="text-4xl sm:text-6xl font-bold mb-8 text-cyan-400"
-            style={{
-              fontFamily: "'Press Start 2P', cursive",
-              textShadow: "0 0 10px #00FFFF, 0 0 20px #00FFFF",
-            }}
-          >
-            LOADING
-          </h1>
-          <div className="w-64 h-6 bg-gray-800 rounded-full overflow-hidden">
-            <motion.div
-              className="h-full bg-gradient-to-r from-purple-600 via-cyan-400 to-purple-600"
-              initial={{ width: "0%" }}
-              animate={{ width: "100%" }}
-              transition={{ duration: 2.5 }}
-            />
-          </div>
-        </div>
-      )}
-      {!isLoading && insertCoin && (
-        <div className="absolute inset-0 z-30 flex flex-col items-center justify-center px-4 text-center">
-          <motion.div
-            className="text-4xl sm:text-5xl md:text-7xl font-bold text-yellow-300 leading-tight max-w-xs sm:max-w-md"
-            style={{
-              fontFamily: "'Press Start 2P', cursive",
-              textShadow: "0 0 10px #FFD700, 0 0 20px #FFD700",
-            }}
-            animate={{ opacity: [1, 0.5, 1] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          >
-            INSERT COIN
-          </motion.div>
-          <motion.button
-            className="mt-8 sm:mt-12 px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-yellow-500 text-black font-bold text-xl sm:text-2xl border-4 border-yellow-300 shadow-md"
-            onClick={handleInsertCoin}
-            whileHover={{
-              scale: 1.05,
-              boxShadow: "0 0 20px rgba(255, 215, 0, 0.7)",
-            }}
-            whileTap={{ scale: 0.95 }}
-          >
-            PLAY
-          </motion.button>
-        </div>
-      )}
-
-      {!isLoading && !insertCoin && (
-        <div className="relative z-20 min-h-screen flex flex-col items-center justify-center">
-          <div
-            className="absolute inset-0 z-0 border-t-16 border-l-16 border-r-16 border-b-32 pointer-events-none"
-            style={{
-              boxShadow: "inset 0 0 100px 20px rgba(0, 0, 0, 0.9)",
-              borderImage: "linear-gradient(to bottom, #6b21a8, #3f007d) 1",
-              borderWidth: "16px",
-              borderBottomWidth: "64px",
-            }}
-          />
-
-          <div className="absolute top-2 left-0 right-0 flex justify-center">
-            <div className="flex space-x-8">
-              <div
-                className="w-8 h-8 rounded-full bg-red-600"
-                style={{ boxShadow: "0 0 10px rgba(255, 0, 0, 0.7)" }}
-              />
-              <div
-                className="w-8 h-8 rounded-full bg-blue-600"
-                style={{ boxShadow: "0 0 10px rgba(0, 0, 255, 0.7)" }}
-              />
-              <div
-                className="w-8 h-8 rounded-full bg-green-600"
-                style={{ boxShadow: "0 0 10px rgba(0, 255, 0, 0.7)" }}
-              />
-            </div>
-          </div>
-
-          <motion.div
-            initial={{ y: -50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-center mb-8"
-          >
-            <h1
-              className="text-5xl sm:text-7xl font-bold mb-2"
-              style={{
-                fontFamily: "'Press Start 2P', cursive",
-                background:
-                  "linear-gradient(to right, #FF4500, #FFA500, #FFD700, #ADFF2F, #00FFFF, #0000FF, #9400D3)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                textShadow: "0 0 10px rgba(255, 255, 255, 0.3)",
-              }}
-            >
-              CARLOS PANTIN
-            </h1>
-            <h2
-              className="text-2xl sm:text-3xl font-bold text-pink-500 mt-4"
-              style={{ textShadow: "0 0 10px rgba(255, 105, 180, 0.7)" }}
-            >
-              Welcome to my portfolio. Here, you can explore more about me and
-              what makes me a great junior developer!
-            </h2>
-          </motion.div>
-
-          <motion.div
-            className="flex flex-col space-y-6 mt-4 w-full max-w-xs"
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-          >
-            <motion.button
-              className="py-4 px-12 bg-gradient-to-r from-green-500 to-teal-500 text-white font-bold text-xl rounded-lg border-4 border-green-300 shadow-lg"
-              style={{ textShadow: "0 0 5px rgba(0, 0, 0, 0.5)" }}
-              onClick={() => router.push("/level1")}
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0 0 25px rgba(0, 255, 128, 0.6)",
-              }}
-              whileTap={{ scale: 0.95 }}
-            >
-              START GAME
-            </motion.button>
-
-            <motion.button
-              className="py-4 px-12 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold text-xl rounded-lg border-4 border-blue-300 shadow-lg"
-              style={{ textShadow: "0 0 5px rgba(0, 0, 0, 0.5)" }}
-              onClick={() => setShowLevelSelect(!showLevelSelect)}
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0 0 25px rgba(0, 128, 255, 0.6)",
-              }}
-              whileTap={{ scale: 0.95 }}
-            >
-              SELECT LEVEL
-            </motion.button>
-          </motion.div>
-
-          <div className="absolute bottom-6 flex justify-center w-full">
-            <div className="flex items-center space-x-20"></div>
-          </div>
-        </div>
-      )}
+    <div className="min-h-screen bg-black text-white flex flex-col overflow-hidden">
+      <div
+        className="fixed inset-0 z-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(20, 20, 80, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(20, 20, 80, 0.15) 1px, transparent 1px)",
+          backgroundSize: "30px 30px",
+          backgroundColor: "#000",
+          backgroundPosition: "-1px -1px",
+        }}
+      />
 
       <AnimatePresence>
-        {showLevelSelect && (
+        {currentState === "intro" && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
+            className="fixed inset-0 z-30 flex flex-col items-center justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            exit={{ opacity: 0, transition: { duration: 0.5 } }}
           >
-            <motion.div
-              className="bg-gray-900 border-4 border-indigo-600 rounded-xl p-8 w-11/12 max-w-md relative"
-              style={{ boxShadow: "0 0 30px rgba(79, 70, 229, 0.6)" }}
-              initial={{ scale: 0.8, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.8, y: 20 }}
-            >
-              <div className="absolute -top-2 -right-2 -left-2 h-10 bg-indigo-700 rounded-t-lg flex items-center justify-between px-4">
-                <div className="flex space-x-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                  <div className="w-3 h-3 rounded-full bg-green-500" />
-                </div>
-                <button
-                  onClick={() => setShowLevelSelect(false)}
-                  className="text-white hover:text-red-300"
+            <div className="w-full max-w-2xl px-6 md:px-0">
+              <motion.div
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.8 }}
+                className="text-center mb-16"
+              >
+                <h1
+                  className="text-5xl md:text-7xl font-bold mb-3"
+                  style={{
+                    fontFamily: "'Press Start 2P', monospace",
+                    color: "#39FF14",
+                    textShadow:
+                      "0 0 10px rgba(57, 255, 20, 0.7), 0 0 20px rgba(57, 255, 20, 0.5)",
+                  }}
                 >
-                  ✕
-                </button>
-              </div>
+                  CARLOS
+                </h1>
+                <h1
+                  className="text-5xl md:text-7xl font-bold mb-6"
+                  style={{
+                    fontFamily: "'Press Start 2P', monospace",
+                    color: "#39FF14",
+                    textShadow:
+                      "0 0 10px rgba(57, 255, 20, 0.7), 0 0 20px rgba(57, 255, 20, 0.5)",
+                  }}
+                >
+                  PANTIN
+                </h1>
+                <h2
+                  className="text-xl md:text-2xl font-bold text-blue-400"
+                  style={{
+                    fontFamily: "'Press Start 2P', monospace",
+                    textShadow: "0 0 8px rgba(59, 130, 246, 0.7)",
+                  }}
+                >
+                  SOFTWARE DEVELOPER
+                </h2>
+                <br />
+                <h2
+                  className="text-xl md:text-xl font-bold text-yellow-400"
+                  style={{
+                    fontFamily: "'Press Start 2P', monospace",
+                    textShadow: "0 0 8px rgba(59, 130, 246, 0.7)",
+                  }}
+                >
+                  My Portfolio
+                </h2>
+              </motion.div>
 
-              <h3
-                className="text-2xl font-bold text-center mb-6 text-cyan-400 mt-6"
-                style={{
-                  fontFamily: "'Press Start 2P', cursive",
-                  textShadow: "0 0 10px rgba(0, 255, 255, 0.5)",
+              <motion.div
+                className="flex justify-center"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.2 }}
+              >
+                <motion.button
+                  className="bg-transparent border-4 border-green-500 text-green-400 py-4 px-12 rounded-md text-xl md:text-2xl relative overflow-hidden group"
+                  style={{ fontFamily: "'Press Start 2P', monospace" }}
+                  onClick={handleStart}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  animate={{
+                    boxShadow: [
+                      "0 0 0px rgba(57, 255, 20, 0)",
+                      "0 0 20px rgba(57, 255, 20, 0.7)",
+                      "0 0 0px rgba(57, 255, 20, 0)",
+                    ],
+                  }}
+                  transition={{
+                    boxShadow: { repeat: Infinity, duration: 2 },
+                  }}
+                >
+                  <span className="relative z-10">START</span>
+                  <motion.div
+                    className="absolute inset-0 bg-green-500 z-0"
+                    initial={{ scaleX: 0 }}
+                    whileHover={{ scaleX: 1 }}
+                    transition={{ duration: 0.3 }}
+                    style={{ transformOrigin: "left" }}
+                  />
+                </motion.button>
+              </motion.div>
+
+              <motion.div
+                className="absolute top-1/4 left-8 md:left-16 w-4 h-4 bg-blue-500"
+                animate={{
+                  y: [0, 10, 0],
                 }}
-              >
-                SELECT LEVEL
-              </h3>
+                transition={{ duration: 2, repeat: Infinity }}
+              />
 
-              <div className="grid grid-cols-2 gap-4">
-                {[1, 2, 3, 4].map((level) => (
-                  <motion.button
-                    key={level}
-                    className="py-3 px-4 bg-indigo-900 hover:bg-indigo-700 text-white font-bold text-lg rounded border-2 border-indigo-500 flex flex-col items-center justify-center"
-                    onClick={() => handleSelectLevel(level)}
-                    whileHover={{
-                      scale: 1.05,
-                      boxShadow: "0 0 15px rgba(79, 70, 229, 0.6)",
-                    }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <span style={{ fontFamily: "'Press Start 2P', cursive" }}>
-                      LEVEL {level}
-                    </span>
-                    <div className="mt-2 text-xs text-cyan-300">
-                      {level === 1 && "INTRO"}
-                      {level === 2 && "SKILLS"}
-                      {level === 3 && "BACKGROUND"}
-                      {level === 4 && "PROJECTS"}
-                    </div>
-                  </motion.button>
-                ))}
-              </div>
-
-              <motion.button
-                className="w-full mt-6 py-3 px-4 bg-red-800 hover:bg-red-700 text-white font-bold text-lg rounded border-2 border-red-500"
-                onClick={() => setShowLevelSelect(false)}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                style={{ fontFamily: "'Press Start 2P', cursive" }}
-              >
-                CANCEL
-              </motion.button>
-            </motion.div>
+              <motion.div
+                className="absolute bottom-1/4 right-8 md:right-16 w-6 h-6 bg-purple-500"
+                animate={{
+                  rotate: [0, 180, 360],
+                }}
+                transition={{ duration: 3, repeat: Infinity }}
+              />
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
 
+      <AnimatePresence>
+        {currentState === "main" && (
+          <motion.div
+            className="fixed inset-0 z-20 flex"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="flex flex-col md:flex-row w-full h-full">
+              <motion.div
+                className="w-full md:w-1/2 h-full flex flex-col justify-center items-center p-6 relative"
+                initial={{ x: -50, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
+              >
+                <div className="w-full max-w-sm">
+                  <h2
+                    className="text-2xl md:text-3xl mb-8 text-center md:text-left"
+                    style={{
+                      fontFamily: "'Press Start 2P', monospace",
+                      color: "#39FF14",
+                      textShadow: "0 0 5px rgba(57, 255, 20, 0.7)",
+                    }}
+                  >
+                    SELECT OPTION
+                  </h2>
+
+                  <div className="space-y-4">
+                    {menuOptions.map((option, index) => (
+                      <motion.button
+                        key={index}
+                        className={`w-full text-left py-4 px-6 rounded-lg border-2 flex items-center transition-colors ${
+                          selectedOption === index
+                            ? "bg-green-900/30 border-green-500 text-green-400"
+                            : "border-gray-700 text-gray-300 hover:border-green-500"
+                        }`}
+                        style={{ fontFamily: "'Press Start 2P', monospace" }}
+                        whileHover={{ x: 8 }}
+                        whileTap={{ scale: 0.98 }}
+                        onMouseEnter={() => setSelectedOption(index)}
+                        onClick={() => handleOptionClick(index)}
+                      >
+                        {selectedOption === index && (
+                          <span className="mr-3 text-green-400">&gt;</span>
+                        )}
+                        {option.label}
+                      </motion.button>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                className="w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center p-6 relative"
+                initial={{ x: 50, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.6, duration: 0.5 }}
+              >
+                <div
+                  className="w-full h-full rounded-lg border-2 border-gray-700 bg-black/80 p-4 md:p-6 overflow-hidden"
+                  style={{
+                    boxShadow:
+                      "0 0 15px rgba(0, 0, 0, 0.5), inset 0 0 2px rgba(255, 255, 255, 0.1)",
+                  }}
+                >
+                  <div className="flex items-center mb-4">
+                    <div className="w-3 h-3 rounded-full bg-red-500 mr-2" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-500 mr-2" />
+                    <div className="w-3 h-3 rounded-full bg-green-500 mr-4" />
+                    <div className="text-gray-400 text-xs">terminal</div>
+                  </div>
+
+                  <div className="font-mono text-green-500 text-sm md:text-base space-y-2">
+                    <p>$ whoami</p>
+                    <p className="text-white">
+                      Carlos Pantin - Passionate and SkilFul Software Engineer
+                    </p>
+                    <p>$ skills</p>
+                    <p className="text-white">
+                      JavaScript, React, NextJS, TailwindCSS, Python, Database
+                      Management, Cloud Platforms, DevOps...
+                    </p>
+                    <p>$ experience</p>
+                    <p className="text-white">
+                      Junior developer with passion for Software Engineering
+                    </p>
+                    <p>$ Traits</p>
+                    <p className="text-white">
+                      Creative problem-solver, fast learner, team player
+                    </p>
+                    <p className="flex">
+                      ${" "}
+                      <span className="text-white ml-1">
+                        Ready to know more about me?
+                      </span>
+                      {showCursor && (
+                        <span className="ml-1 border-r-2 border-green-500 animate-blink">
+                          &nbsp;
+                        </span>
+                      )}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className="fixed bottom-3 left-3 text-gray-600 text-xs z-10">
+        v1.0
+      </div>
+
       <style jsx global>{`
         @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 
-        /* Star background effect */
-        .stars-container {
-          background-image: radial-gradient(
-            circle,
-            rgba(255, 255, 255, 0.8) 1px,
-            transparent 1px
-          );
-          background-size: 50px 50px;
-          animation: stars-scroll 60s linear infinite;
+        body {
+          margin: 0;
+          padding: 0;
+          background-color: #000;
+          font-family: "Inter", sans-serif;
+          overflow-x: hidden;
         }
 
-        @keyframes stars-scroll {
-          0% {
-            background-position: 0 0;
-          }
+        @keyframes blink {
+          0%,
           100% {
-            background-position: 0 1000px;
+            opacity: 1;
+          }
+          50% {
+            opacity: 0;
           }
         }
 
-        /* Glitch animation */
-        @keyframes glitch {
-          0% {
-            transform: translate(0);
-          }
-          20% {
-            transform: translate(-5px, 5px);
-          }
-          40% {
-            transform: translate(-5px, -5px);
-          }
-          60% {
-            transform: translate(5px, 5px);
-          }
-          80% {
-            transform: translate(5px, -5px);
-          }
-          100% {
-            transform: translate(0);
-          }
-        }
-
-        .animate-glitch {
-          animation: glitch 0.2s ease-in-out;
+        .animate-blink {
+          animation: blink 1s infinite;
         }
       `}</style>
     </div>

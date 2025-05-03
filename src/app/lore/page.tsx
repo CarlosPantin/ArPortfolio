@@ -141,14 +141,14 @@ export default function CharacterLorePage() {
 
       <div className="relative mb-8 z-10">
         <h1 className="text-4xl sm:text-6xl font-[Press Start 2P] text-cyan-300 mb-2">
-          CHARACTER LORE
+          MY BACKGROUND AND EXPERIENCE
         </h1>
         <div
           className={`text-sm font-[Press Start 2P] text-yellow-300 ${
             blinkingState ? "opacity-0" : "opacity-100"
           }`}
         >
-          SELECT QUEST TYPE
+          SELECT TYPE
         </div>
       </div>
 
@@ -261,7 +261,7 @@ export default function CharacterLorePage() {
               blinkingState ? "opacity-70" : "opacity-100"
             }`}
           ></div>
-          NEXT LEVEL
+          CONTINUE
         </button>
       </div>
     </div>

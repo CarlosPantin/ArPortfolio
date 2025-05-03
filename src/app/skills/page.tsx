@@ -33,7 +33,7 @@ export default function SkillsPage() {
     >
       <div className="bg-black bg-opacity-50 p-4 rounded-lg mb-8">
         <h1 className="text-4xl sm:text-6xl font-[Press Start 2P] text-white">
-          SKILL TREE
+          MY SKILLS
         </h1>
         <p
           className={`text-yellow-300 font-[Press Start 2P] text-sm mt-2 ${
@@ -121,7 +121,7 @@ export default function SkillsPage() {
           onClick={() => router.push("/level3")}
           className="px-8 py-4 bg-blue-600 text-white font-[Press Start 2P] rounded-lg border-b-4 border-blue-800 hover:bg-blue-500 active:border-b-0 active:mt-1 transition-all"
         >
-          NEXT LEVEL
+          CONTINUE
         </button>
       </div>
     </div>

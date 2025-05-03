@@ -310,7 +310,7 @@ export default function ArcadeProjects() {
               className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 mb-4 font-arcade"
               style={{ textShadow: "0 0 10px rgba(255,0,255,0.7)" }}
             >
-              [PROJECT ARCADE]
+              [MY PROJECTS]
             </h1>
           </motion.div>
           <motion.div
@@ -365,7 +365,7 @@ export default function ArcadeProjects() {
           >
             <div className="flex items-center space-x-2">
               <MdGamepad className="text-xl" />
-              <span>CONTINUE ADVENTURE</span>
+              <span>CONTACT ME</span>
             </div>
             <div
               className="absolute -inset-px bg-gradient-to-r from-transparent via-purple-400 to-transparent opacity-20 blur"

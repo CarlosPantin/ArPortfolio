@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import RetroGameNavigation from "../components/RetroGameNavigation";
 
 type LoreType = "Educational" | "Professional";
 
@@ -138,7 +139,7 @@ export default function CharacterLorePage() {
           backgroundPosition: "center",
         }}
       />
-
+      <RetroGameNavigation />
       <div className="relative mb-8 z-10">
         <h1 className="text-4xl sm:text-6xl font-[Press Start 2P] text-cyan-300 mb-2">
           MY BACKGROUND AND EXPERIENCE

@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-
+import RetroGameNavigation from "../components/RetroGameNavigation";
 interface Skill {
   icon: string;
   name: string;
@@ -31,6 +31,7 @@ export default function SkillsPage() {
         backgroundPosition: "center",
       }}
     >
+      <RetroGameNavigation />
       <div className="bg-black bg-opacity-50 p-4 rounded-lg mb-8">
         <h1 className="text-4xl sm:text-6xl font-[Press Start 2P] text-white">
           MY SKILLS

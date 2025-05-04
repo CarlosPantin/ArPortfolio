@@ -13,6 +13,7 @@ import {
   DiPython,
 } from "react-icons/di";
 import { SiJavascript, SiTailwindcss, SiTypescript } from "react-icons/si";
+import RetroGameNavigation from "../components/RetroGameNavigation";
 
 interface Project {
   id: number;
@@ -298,8 +299,9 @@ export default function ArcadeProjects() {
           style={{ animation: "gridMove 20s infinite linear" }}
         />
       </div>
-
       <div className="relative z-10 min-h-screen container mx-auto px-4">
+        <br />
+        <br />
         <header className="pt-16 pb-12 text-center">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -326,7 +328,7 @@ export default function ArcadeProjects() {
             </div>
           </motion.div>
         </header>
-
+        <RetroGameNavigation />
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 pb-16"
           initial={{ opacity: 0 }}

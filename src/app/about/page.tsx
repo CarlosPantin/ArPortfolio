@@ -1,13 +1,11 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import RetroGameNavigation from "../components/RetroGameNavigation";
 
 export default function AboutPage() {
-  const router = useRouter();
   const [animationState, setAnimationState] = useState(0);
 
-  // Simple, lighter animation
   useEffect(() => {
     const interval = setInterval(() => {
       setAnimationState((prev) => (prev + 1) % 2);
@@ -44,6 +42,7 @@ export default function AboutPage() {
       </div>
 
       <div className="relative z-10 flex flex-col items-center justify-start pt-10 px-4">
+        <RetroGameNavigation />
         <div className="relative mb-8">
           <h1 className="text-5xl sm:text-6xl font-[Press Start 2P] text-white mb-2">
             CARLOS PANTIN
@@ -127,20 +126,6 @@ export default function AboutPage() {
 
             <div className="mt-6 flex justify-end"></div>
           </div>
-        </div>
-
-        <div className="mt-12 mb-10">
-          <button
-            onClick={() => router.push("/level2")}
-            className="relative px-10 py-4 bg-red-600 text-white font-[Press Start 2P] rounded-lg border-4 border-b-8 border-red-800 hover:bg-red-500 active:border-b-4 active:translate-y-1 transform transition-all"
-          >
-            <div
-              className={`absolute -top-2 -right-2 w-4 h-4 bg-yellow-300 rounded-full ${
-                animationState === 1 ? "opacity-70" : "opacity-100"
-              }`}
-            ></div>
-            NEXT LEVEL
-          </button>
         </div>
       </div>
     </div>

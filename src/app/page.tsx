@@ -375,7 +375,7 @@ function RetroGamingPortfolioContent() {
                     >
                       <TypewriterText
                         text="Take a look and discover what makes me a skilful Software Developer"
-                        delay={80}
+                        delay={50}
                         startDelay={3000}
                       />
                     </h2>

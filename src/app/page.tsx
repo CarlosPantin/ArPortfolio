@@ -57,10 +57,10 @@ function RetroGamingPortfolioContent() {
   const powerUpEffectsRef = useRef<PowerUpEffect[]>([]);
 
   const menuOptions: MenuOption[] = [
-    { label: "PROJECTS", path: "/myprojects" },
-    { label: "SKILLS", path: "/skills" },
     { label: "ABOUT ME", path: "/about" },
+    { label: "SKILLS", path: "/skills" },
     { label: "BACKGROUND & EXPERIENCE", path: "/lore" },
+    { label: "PROJECTS", path: "/myprojects" },
     { label: "CONTACT ME", path: "/contact" },
   ];
 

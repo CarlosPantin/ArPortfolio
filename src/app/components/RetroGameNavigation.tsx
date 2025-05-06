@@ -10,10 +10,10 @@ export default function RetroGameNavigation() {
 
   const navItems = [
     { path: "/", label: "HOME", icon: "🏠" },
-    { path: "/lore", label: "BACKGROUND", icon: "📜" },
-    { path: "/skills", label: "SKILLS", icon: "⚔️" },
-    { path: "/myprojects", label: "PROJECTS", icon: "🛡️" },
     { path: "/about", label: "ABOUT", icon: "📊" },
+    { path: "/skills", label: "SKILLS", icon: "⚔️" },
+    { path: "/lore", label: "BACKGROUND", icon: "📜" },
+    { path: "/myprojects", label: "PROJECTS", icon: "🛡️" },
     { path: "/contact", label: "CONTACT", icon: "✉️" },
   ];
 

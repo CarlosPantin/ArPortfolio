@@ -500,7 +500,7 @@ export default function AboutPage() {
 
                 <div className="flex flex-wrap gap-2 justify-start">
                   {[
-                    { icon: "📧", label: "EMAIL", value: "carlos@example.com" },
+                    { icon: "📧", label: "EMAIL", value: "cpantin00@gmail.com" },
                     {
                       icon: "🌐",
                       label: "WEBSITE",
